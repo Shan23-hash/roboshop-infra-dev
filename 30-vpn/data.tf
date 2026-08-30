@@ -1,5 +1,5 @@
 data "aws_ami" "openvpn" {
-  owners           = ["679593333241"]
+  owners           = ["565257597039"]
   most_recent      = true
 
   filter {
