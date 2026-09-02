@@ -1,4 +1,4 @@
-resource "aws_acm_certificate" "daws-shankran" {
+resource "aws_acm_certificate" "kranthi" {
   domain_name       = "*.${var.zone_name}"
   validation_method = "DNS"
 
@@ -14,9 +14,9 @@ resource "aws_acm_certificate" "daws-shankran" {
   }
 }
 
-resource "aws_route53_record" "daws-shankran" {
+resource "aws_route53_record" "kranthi" {
   for_each = {
-    for dvo in aws_acm_certificate.daws-shankran.domain_validation_options : dvo.domain_name => {
+    for dvo in aws_acm_certificate.dkranthi.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
       type   = dvo.resource_record_type
@@ -31,7 +31,7 @@ resource "aws_route53_record" "daws-shankran" {
   zone_id         = var.zone_id
 }
 
-resource "aws_acm_certificate_validation" "daws-shankran" {
-  certificate_arn         = aws_acm_certificate.daws-shankran.arn
-  validation_record_fqdns = [for record in aws_route53_record.daws-shankran : record.fqdn]
+resource "aws_acm_certificate_validation" "kranthi" {
+  certificate_arn         = aws_acm_certificate.kranthi.arn
+  validation_record_fqdns = [for record in aws_route53_record.kranthi : record.fqdn]
 }
